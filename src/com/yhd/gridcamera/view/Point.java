@@ -6,13 +6,17 @@ public class Point {
 	private int y;
 	private int itemWidth;
 	private int itemHeight;
+	private int indexX;
+	private int indexY;
 	
-	public Point(int x, int y, int itemWidth, int itemHeight) {
+	public Point(int x, int y, int itemWidth, int itemHeight, int indexX, int indexY) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.itemWidth = itemWidth;
 		this.itemHeight = itemHeight;
+		this.indexX = indexX;
+		this.indexY = indexY;
 	}
 	public int getX() {
 		return x;

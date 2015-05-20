@@ -33,6 +33,8 @@ import java.util.List;
  */
 public class CameraView extends SurfaceView implements SurfaceHolder.Callback, Camera.PreviewCallback{
 
+	public native boolean isIdle(String picPath);
+	
     private Camera mCamera;
     private SurfaceHolder mHolder;
     private Context context;
@@ -144,29 +146,36 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
         matrix.setRotate(90);
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+        
 //        Bitmap result = Bitmap.createBitmap(bitmap, RectView.viewLeft, RectView.viewTop,
 //                RectView.viewWidth, RectView.viewHeight);
-//        try {
-//            saveFile(result, "opencv.png");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            saveFile(bitmap, "opencv.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         /*  使用 setPreviewCallbackWithBuffer 需要在两个地方调用  addCallbackBuffer
         byte[] dataa = new byte[38016];
         mCamera.addCallbackBuffer(dataa);*/
     }
 
     public void saveFile(Bitmap bm, String fileName) throws IOException {
-        String path = Environment.getExternalStorageDirectory() +"/revoeye/";
+        String path = Environment.getExternalStorageDirectory() +"/GridCamera/";
         File dirFile = new File(path);
         if(!dirFile.exists()){
             dirFile.mkdir();
         }
         File myCaptureFile = new File(path + fileName);
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-        bm.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+        bm.compress(Bitmap.CompressFormat.PNG, 100, bos);
         bos.flush();
         bos.close();
+        if(isIdle(myCaptureFile.getAbsolutePath())){
+        	Log.e("123", "233333");
+        }else{
+        	Log.e("123", ".......");
+        }
     }
 
 }

@@ -40,26 +40,5 @@ public class MainActivity extends Activity {
             f.addView(cv);
             f.addView(mRectView);
         }
-		
-//        name();
-//        name();
-//        name();
-//        name();
-//        name();
-//        name();
-//        name();
-        
-//        Random r = new Random(100);
-//        r.nextInt();
-        
-//		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-//		Button button = (Button) findViewById(R.id.jnitest);
-//		button.setText(ImgFun());
 	}
-	
-//	private void name() {
-//		Point p = mRectView.getNextColPoint();
-//        Log.e("123", p.getX()+"  "+p.getY()+"  "+p.getItemWidth()+"  "+p.getItemHeight());
-//	}
-	
 }

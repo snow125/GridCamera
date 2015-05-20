@@ -89,8 +89,8 @@ public class RectView extends View {
     	if(indexY >= rowNum){
     		return null;
     	}
-    	//Log.e("123", indexX+"  "+indexY);
 		return new Point(viewLeft+indexX*itemWidth, viewTop+indexY*itemHeight, 
-				viewLeft+itemWidth+indexX*itemWidth, viewTop+itemHeight+indexY*itemHeight);
+				viewLeft+itemWidth+indexX*itemWidth, viewTop+itemHeight+indexY*itemHeight,
+				indexX, indexY);
     }
 }

@@ -7,6 +7,6 @@ include E:\OpenCV\android\OpenCV-2.4.9-android-sdk\sdk\native\jni\OpenCV.mk
 else    
 include $(OPENCV_MK_PATH)    
 endif    
-LOCAL_MODULE    := ImgFun  
-LOCAL_SRC_FILES := ImgFun.cpp    
+LOCAL_MODULE    := DealPicture  
+LOCAL_SRC_FILES := DealPicture.cpp    
 include $(BUILD_SHARED_LIBRARY)

@@ -10,10 +10,8 @@ import android.hardware.Camera;
 public class CameraInstance {
 
 	static {  
-        System.loadLibrary("ImgFun");  
+        System.loadLibrary("DealPicture");  
     }
-	
-	public static native String ImgFun();
 	
     public static Camera getCameraInstance(){
         Camera c = null;
