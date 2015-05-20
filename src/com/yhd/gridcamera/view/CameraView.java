@@ -144,7 +144,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
         matrix.setRotate(90);
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-        Log.e("123", "thsi");
 //        Bitmap result = Bitmap.createBitmap(bitmap, RectView.viewLeft, RectView.viewTop,
 //                RectView.viewWidth, RectView.viewHeight);
 //        try {

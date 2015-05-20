@@ -7,6 +7,7 @@ import com.yhd.gridcamera.R.id;
 import com.yhd.gridcamera.R.layout;
 import com.yhd.gridcamera.instance.CameraInstance;
 import com.yhd.gridcamera.view.CameraView;
+import com.yhd.gridcamera.view.RectView;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -20,6 +21,7 @@ import android.widget.FrameLayout;
 public class MainActivity extends Activity {
 
 	private Camera mCamera;
+	private RectView mRectView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,12 @@ public class MainActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
 		mCamera = CameraInstance.getCameraInstance();
+		mRectView = new RectView(this);
 		FrameLayout f = (FrameLayout) findViewById(R.id.camera);
         if(mCamera != null){
             CameraView cv = new CameraView(this, mCamera);
             f.addView(cv);
-            //f.addView(mRectView);
+            f.addView(mRectView);
         }
 		
 //		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
