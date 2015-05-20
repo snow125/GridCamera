@@ -1,12 +1,15 @@
 package com.yhd.gridcamera.activity;
 
 
+import java.util.Random;
+
 import com.yhd.gridcamera.R;
 import com.yhd.gridcamera.R.drawable;
 import com.yhd.gridcamera.R.id;
 import com.yhd.gridcamera.R.layout;
 import com.yhd.gridcamera.instance.CameraInstance;
 import com.yhd.gridcamera.view.CameraView;
+import com.yhd.gridcamera.view.Point;
 import com.yhd.gridcamera.view.RectView;
 
 import android.app.Activity;
@@ -14,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -37,8 +41,25 @@ public class MainActivity extends Activity {
             f.addView(mRectView);
         }
 		
+//        name();
+//        name();
+//        name();
+//        name();
+//        name();
+//        name();
+//        name();
+        
+//        Random r = new Random(100);
+//        r.nextInt();
+        
 //		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 //		Button button = (Button) findViewById(R.id.jnitest);
 //		button.setText(ImgFun());
 	}
+	
+//	private void name() {
+//		Point p = mRectView.getNextColPoint();
+//        Log.e("123", p.getX()+"  "+p.getY()+"  "+p.getItemWidth()+"  "+p.getItemHeight());
+//	}
+	
 }

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -32,6 +33,9 @@ public class RectView extends View {
     private int rowNum = 4;
     private int itemWidth;
     private int itemHeight;
+    
+    private int indexX = -1;
+    private int indexY;
 
     public RectView(Context context) {
         super(context);
@@ -74,5 +78,19 @@ public class RectView extends View {
         	canvas.drawLine(viewLeft, viewTop+i*itemHeight, 
         			viewLeft+viewWidth, viewTop+i*itemHeight, p);
 		}
+    }
+    
+    public Point getNextColPoint(){
+    	indexX++;
+    	if(indexX > colNum){
+    		indexX = 0;
+    		indexY++;
+    	}
+    	if(indexY >= rowNum){
+    		return null;
+    	}
+    	//Log.e("123", indexX+"  "+indexY);
+		return new Point(viewLeft+indexX*itemWidth, viewTop+indexY*itemHeight, 
+				viewLeft+itemWidth+indexX*itemWidth, viewTop+itemHeight+indexY*itemHeight);
     }
 }
