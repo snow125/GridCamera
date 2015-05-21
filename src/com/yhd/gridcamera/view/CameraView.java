@@ -1,5 +1,7 @@
 package com.yhd.gridcamera.view;
 
+import android.R.bool;
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,6 +13,7 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Environment;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
@@ -42,6 +45,7 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
     private int previewSizeCount;
     private RectView mRectView;
     private List<DealPictureThread> threads = new ArrayList<>();
+    private boolean isRunning = true;
 
     public CameraView(Context context, Camera camera, RectView mRectView) {
         super(context);
@@ -129,6 +133,9 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
 
     public void releaseCamera(){
         if (mCamera != null){
+        	for (int i = 0; i < threads.size(); i++) {
+        		threads.get(i).interrupt();
+			}
             mCamera.setPreviewCallback(null);
             mCamera.release();
             mCamera = null;
@@ -136,28 +143,36 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback, C
     }
 
     @Override
-    public void onPreviewFrame(byte[] data, Camera camera) {
-    	
+    public void onPreviewFrame(final byte[] data, final Camera camera) {
     	if(threads.size()>10){
     		return;
     	}
-    	
-        Camera.Size size = camera.getParameters().getPreviewSize();
-        YuvImage yuv = new YuvImage(data, ImageFormat.NV21, size.width, size.height, null);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        yuv.compressToJpeg(new Rect(0, 0, size.width, size.height), 100, bos);
-        byte[] rgbImage = bos.toByteArray();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(rgbImage, 0, rgbImage.length);
-        Matrix matrix = new Matrix();
-        matrix.setRotate(90);
-        bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-        
-        threads.add(new DealPictureThread(mRectView, bitmap));
 
+    	if(isRunning){
+    		threads.add(new DealPictureThread(data, camera, mRectView));
+    	}else{
+    		return;
+    	}
+        
         /*  使用 setPreviewCallbackWithBuffer 需要在两个地方调用  addCallbackBuffer
         byte[] dataa = new byte[38016];
         mCamera.addCallbackBuffer(dataa);*/
     }
 
+	public boolean isRunning() {
+		return isRunning;
+	}
+
+	public void setRunning(boolean isRunning) {
+		this.isRunning = isRunning;
+	}
+
+	public List<DealPictureThread> getThreads() {
+		return threads;
+	}
+
+	public void setThreads(List<DealPictureThread> threads) {
+		this.threads = threads;
+	}
+	
 }
