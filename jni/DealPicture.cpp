@@ -9,9 +9,9 @@ using namespace cv;
 //__android_log_print(ANDROID_LOG_INFO, LOG_TAG, "input: %d ", m.rows);
 
 extern "C" {
-JNIEXPORT jboolean JNICALL Java_com_yhd_gridcamera_view_CameraView_isIdle(
+JNIEXPORT jboolean JNICALL Java_com_yhd_gridcamera_manage_DealPictureThread_isIdle(
         JNIEnv* env, jobject obj, jstring bitmap);
-JNIEXPORT jboolean JNICALL Java_com_yhd_gridcamera_view_CameraView_isIdle(
+JNIEXPORT jboolean JNICALL Java_com_yhd_gridcamera_manage_DealPictureThread_isIdle(
         JNIEnv* env, jobject obj, jstring bitmap) {
 		const char* str = env->GetStringUTFChars(bitmap, false);
 		Mat m = imread(str, 0);

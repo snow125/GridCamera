@@ -86,11 +86,29 @@ public class RectView extends View {
     		indexX = 0;
     		indexY++;
     	}
-    	if(indexY >= rowNum){
+    	if(indexY > rowNum){
     		return null;
     	}
 		return new Point(viewLeft+indexX*itemWidth, viewTop+indexY*itemHeight, 
-				viewLeft+itemWidth+indexX*itemWidth, viewTop+itemHeight+indexY*itemHeight,
+				itemWidth, itemHeight,
 				indexX, indexY);
+    }
+    
+    public synchronized Point getNextPoint(int x, int y){
+		return new Point(viewLeft+x*itemWidth, viewTop+y*itemHeight, 
+				itemWidth, itemHeight,
+				x, y);
+    }
+    
+    public int getColNum() {
+		return colNum;
+	}
+
+	public int getRowNum() {
+		return rowNum;
+	}
+
+	public int getPointCount(){
+    	return (colNum+1) * (rowNum+1);
     }
 }
